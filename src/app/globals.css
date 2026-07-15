@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0B0B0D;
+  --background-secondary: #141416;
+  --foreground: #F5F5F5;
+  --muted: #A0A0A0;
+  --primary: #C89B3C;
+  --primary-hover: #A9783A;
+  --border: rgba(200, 155, 60, 0.15); /* translucent gold */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-border: var(--border);
+  
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Custom selection */
+::selection {
+  background: rgba(200, 155, 60, 0.3);
+  color: #fff;
+}
+
+/* Lenis CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
