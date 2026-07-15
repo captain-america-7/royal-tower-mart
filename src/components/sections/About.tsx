@@ -107,8 +107,8 @@ export function About() {
           
           <div className="about-image absolute right-4 sm:right-10 bottom-10 w-52 h-68 sm:w-64 sm:h-84 md:w-72 md:h-96 bg-background-secondary rounded-2xl overflow-hidden shadow-2xl border border-border/50 z-20">
             <Image 
-              src="https://images.unsplash.com/photo-1542314831-c53cd4b85ca4?q=80&w=1000&auto=format&fit=crop"
-              alt="Luxury room interior design comfort hotel stay"
+              src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1000&auto=format&fit=crop"
+              alt="Luxury hotel room interior design comfort hotel stay"
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
               className="object-cover"

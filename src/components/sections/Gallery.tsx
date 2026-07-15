@@ -13,16 +13,15 @@ const categories = [
   "Exterior",
   "Gym",
   "Rooms",
-  "Food",
-  "Cave",
+  "Cafe",
   "Shopping Area",
 ];
 
 const galleryItems = [
   {
     category: "Exterior",
-    img: "https://images.unsplash.com/photo-1541888073574-e3505cdd81d3?q=80&w=800&auto=format&fit=crop",
-    title: "Golden Hour View",
+    img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop",
+    title: "Commercial Tower Front",
     size: "aspect-[4/5]",
   },
   {
@@ -38,15 +37,15 @@ const galleryItems = [
     size: "aspect-[4/3]",
   },
   {
-    category: "Cave",
-    img: "https://images.unsplash.com/photo-1507163879411-5e9275ab4557?q=80&w=800&auto=format&fit=crop",
-    title: "Themed Cave Entry",
+    category: "Cafe",
+    img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=800&auto=format&fit=crop",
+    title: "Premium Cafe Lounge",
     size: "aspect-[4/5]",
   },
   {
-    category: "Food",
+    category: "Cafe",
     img: "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?q=80&w=800&auto=format&fit=crop",
-    title: "KitKat Shake Special",
+    title: "Signature Drinks",
     size: "aspect-square",
   },
   {
@@ -56,7 +55,7 @@ const galleryItems = [
     size: "aspect-[3/4]",
   },
   {
-    category: "Food",
+    category: "Cafe",
     img: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=800&auto=format&fit=crop",
     title: "Classic Cold Coffee",
     size: "aspect-[4/5]",
@@ -69,8 +68,8 @@ const galleryItems = [
   },
   {
     category: "Exterior",
-    img: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=800&auto=format&fit=crop",
-    title: "Mart Night Lights",
+    img: "https://images.unsplash.com/photo-1541888073574-e3505cdd81d3?q=80&w=800&auto=format&fit=crop",
+    title: "Golden Hour Showcase",
     size: "aspect-[4/3]",
   },
 ];
