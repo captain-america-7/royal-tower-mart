@@ -30,7 +30,7 @@ export function Footer() {
           <div>
             <h4 className="font-heading text-2xl text-foreground mb-6">Explore</h4>
             <ul className="space-y-3.5">
-              {["About", "Gym", "Cave", "Rooms", "Gallery", "Food & Refreshments"].map((item) => (
+              {["About", "Gym", "Cafe", "Rooms", "Gallery", "Food & Refreshments"].map((item) => (
                 <li key={item}>
                   <Link href={`#${item.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} className="text-base md:text-lg text-muted hover:text-primary transition-colors inline-flex items-center gap-2 group py-0.5">
                     <span className="w-0 h-px bg-primary transition-all group-hover:w-4"></span>

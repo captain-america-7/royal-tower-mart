@@ -10,14 +10,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const floors = [
   {
-    id: "third",
-    title: "Third Floor",
-    subtitle: "Themed Cave Experience",
-    description: "An immersive, stone-carved atmospheric lounge with custom ambient lighting and premium vibes.",
-    height: "h-32 md:h-40",
-    image: "https://images.unsplash.com/photo-1507163879411-5e9275ab4557?q=80&w=600&auto=format&fit=crop",
-  },
-  {
     id: "second",
     title: "Second Floor",
     subtitle: "Modern Gym Center",

@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function Cave() {
+export function CafeExperience() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -73,7 +73,7 @@ export function Cave() {
     };
     drawParticles();
 
-    // GSAP ScrollTrigger timeline to simulate stepping inside the cave
+    // GSAP ScrollTrigger timeline to simulate stepping inside the cafe
     const context = gsap.context(() => {
       if (prefersReducedMotion) return;
 
@@ -126,13 +126,13 @@ export function Cave() {
   }, [prefersReducedMotion]);
 
   return (
-    <section ref={containerRef} id="cave" className="relative h-screen w-full bg-background overflow-hidden flex items-center justify-center">
+    <section ref={containerRef} id="cafe" className="relative h-screen w-full bg-background overflow-hidden flex items-center justify-center">
       
-      {/* Background Cave Interior */}
+      {/* Background Cafe Interior */}
       <div className="cave-background absolute inset-0 w-full h-full scale-100">
         <Image
-          src="https://images.unsplash.com/photo-1507163879411-5e9275ab4557?q=80&w=1600&auto=format&fit=crop"
-          alt="Atmospheric themed stone cave interior with ambient gold lights"
+          src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=1600&auto=format&fit=crop"
+          alt="Atmospheric premium cafe lounge interior at Royal Tower Mart"
           fill
           sizes="100vw"
           className="object-cover"
@@ -141,24 +141,24 @@ export function Cave() {
         <div className="absolute inset-0 bg-black/70 z-0" />
       </div>
 
-      {/* Floating Dust Particles Canvas */}
+      {/* Floating Dust/Steam Particles Canvas */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-20 pointer-events-none" />
 
       {/* Volumetric Moving Light Rays */}
       <div className="cave-light-ray absolute top-0 left-1/3 w-64 h-[150%] bg-gradient-to-b from-primary/15 to-transparent blur-[80px] origin-top rotate-12 z-20 pointer-events-none mix-blend-screen" />
       <div className="cave-light-ray absolute top-0 right-1/4 w-48 h-[150%] bg-gradient-to-b from-primary/10 to-transparent blur-[70px] origin-top -rotate-12 z-20 pointer-events-none mix-blend-screen" />
 
-      {/* Inner Cave Experience Details (Revealed as we walk in) */}
+      {/* Inner Cafe Experience Details */}
       <div className="cave-inner-content relative z-30 max-w-4xl text-center px-6 flex flex-col items-center gap-8">
-        <span className="text-primary text-xs font-semibold uppercase tracking-[0.3em] block">Exclusive Lounge</span>
+        <span className="text-primary text-xs font-semibold uppercase tracking-[0.3em] block">Artisanal Coffee & Dining</span>
         <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl text-foreground font-bold leading-tight">
-          The Themed <span className="text-primary italic block md:inline">Cave Experience</span>
+          The Premium <span className="text-primary italic block md:inline">Cafe Experience</span>
         </h2>
         <p className="text-muted text-base md:text-lg max-w-2xl font-light leading-relaxed">
-          Step into our signature space—a custom carved stone experience featuring warm ambient lighting, peaceful mood setting, and absolute privacy. Perfect for relaxation, small events, or a distinct evening escape.
+          Indulge in our selection of freshly brewed single-origin coffees, handcrafted shakes, and gourmet bakery items. Surrounded by a warm, sophisticated atmosphere with ambient gold lighting and absolute comfort.
         </p>
         <button className="group relative overflow-hidden rounded-full border border-primary px-8 py-4 font-medium text-primary hover:text-background transition-all" data-magnetic>
-          <span className="relative z-10">Reserve The Cave</span>
+          <span className="relative z-10">Explore the Menu</span>
           <div className="absolute inset-0 bg-primary transform translate-y-full transition-transform duration-300 group-hover:translate-y-0 z-0" />
         </button>
       </div>
@@ -170,8 +170,8 @@ export function Cave() {
           <div className="cave-gate-left w-1/2 h-full bg-background border-r border-border/20 flex flex-col items-end justify-center pr-6 md:pr-16 relative">
             <div className="absolute inset-0 bg-radial-gradient(at center, rgba(200, 155, 60, 0.05), transparent)" />
             <div className="text-right pointer-events-auto">
-              <span className="text-xs uppercase tracking-widest text-primary block mb-2">Signature Escape</span>
-              <h3 className="font-heading text-2xl md:text-4xl text-foreground">The Cave</h3>
+              <span className="text-xs uppercase tracking-widest text-primary block mb-2">Signature Brews</span>
+              <h3 className="font-heading text-2xl md:text-4xl text-foreground">The Cafe</h3>
             </div>
           </div>
           {/* Right Gate */}

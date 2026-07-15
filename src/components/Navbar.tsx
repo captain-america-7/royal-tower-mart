@@ -20,7 +20,7 @@ export function Navbar() {
   const navLinks = [
     { name: "About", href: "#about" },
     { name: "Gym", href: "#gym" },
-    { name: "Cave", href: "#cave" },
+    { name: "Cafe", href: "#cafe" },
     { name: "Rooms", href: "#rooms" },
     { name: "Gallery", href: "#gallery" },
   ];
