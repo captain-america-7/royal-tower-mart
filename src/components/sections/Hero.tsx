@@ -103,7 +103,7 @@ export function Hero() {
           Where Shopping, Fitness & Comfort Meet. Redefining convenience and luxury in Bithoor, Kanpur.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-xl">
           <button className="hero-cta group relative overflow-hidden rounded-full border border-transparent bg-primary px-8 h-14 font-medium text-background transition-transform hover:scale-105 w-full sm:w-auto min-w-[200px] text-center flex items-center justify-center" data-magnetic>
             <span className="relative z-10">Explore Royal Tower</span>
             <div className="absolute inset-0 bg-primary-hover transform translate-y-full transition-transform duration-300 group-hover:translate-y-0 z-0" />

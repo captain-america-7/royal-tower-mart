@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/utils/cn";
@@ -14,6 +15,7 @@ const floors = [
     subtitle: "Themed Cave Experience",
     description: "An immersive, stone-carved atmospheric lounge with custom ambient lighting and premium vibes.",
     height: "h-32 md:h-40",
+    image: "https://images.unsplash.com/photo-1507163879411-5e9275ab4557?q=80&w=600&auto=format&fit=crop",
   },
   {
     id: "second",
@@ -21,6 +23,7 @@ const floors = [
     subtitle: "Modern Gym Center",
     description: "State-of-the-art fitness equipment, biomechanical trainers, and high-energy ambient lighting.",
     height: "h-32 md:h-40",
+    image: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=600&auto=format&fit=crop",
   },
   {
     id: "ground",
@@ -28,6 +31,7 @@ const floors = [
     subtitle: "Premium Convenience Store",
     description: "A meticulously organized, ultra-clean mart featuring a gourmet coffee counter and local specialties.",
     height: "h-32 md:h-40",
+    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600&auto=format&fit=crop",
   },
   {
     id: "basement",
@@ -35,6 +39,7 @@ const floors = [
     subtitle: "Luxury Stays & Lobby",
     description: "Exquisite and peaceful overnight suites designed for relaxation and premium comfort.",
     height: "h-40 md:h-48",
+    image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=600&auto=format&fit=crop",
   },
 ];
 
@@ -162,18 +167,28 @@ export function BuildingShowcase() {
                   key={`block-${floor.id}`}
                   className={cn(
                     `floor-block floor-block-${floor.id}`,
-                    "relative w-full rounded-lg border border-primary/30 bg-background/50 backdrop-blur-sm overflow-hidden",
+                    "relative w-full rounded-lg border border-primary/30 bg-background/50 backdrop-blur-sm overflow-hidden group hover:border-primary/60 transition-colors",
                     floor.height
                   )}
                 >
+                  {/* Floor Background Image */}
+                  <Image 
+                    src={floor.image}
+                    alt={floor.subtitle}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-10 pointer-events-none" />
+                  
                   {/* Glass reflection effect */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-50" />
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover:opacity-100 blur-sm transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-50 z-10 pointer-events-none" />
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover:opacity-100 blur-sm transition-opacity z-10 pointer-events-none" />
                   
                   {/* Structure details */}
-                  <div className="absolute bottom-0 w-full h-1 bg-primary/20" />
-                  <div className="flex h-full items-center justify-center p-4">
-                    <span className="font-heading text-2xl text-white/10 font-bold uppercase tracking-widest">{floor.subtitle}</span>
+                  <div className="absolute bottom-0 w-full h-1 bg-primary/20 z-20" />
+                  <div className="flex h-full items-center justify-center p-4 relative z-20">
+                    <span className="font-heading text-2xl text-foreground font-bold uppercase tracking-widest text-center">{floor.subtitle}</span>
                   </div>
                 </div>
               ))}

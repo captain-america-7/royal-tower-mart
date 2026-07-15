@@ -38,7 +38,7 @@ export function About() {
         const images = gsap.utils.toArray(".about-image");
         images.forEach((img: any, i) => {
           gsap.to(img, {
-            yPercent: -20 * (i + 1),
+            yPercent: -8 * (i + 1),
             ease: "none",
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -91,10 +91,10 @@ export function About() {
         </div>
 
         {/* Images Section */}
-        <div className="w-full lg:w-1/2 relative h-[600px] flex items-center justify-center" ref={imagesRef}>
+        <div className="w-full lg:w-1/2 relative h-[400px] sm:h-[500px] md:h-[600px] flex items-center justify-center" ref={imagesRef}>
           <div className="absolute inset-0 bg-primary/5 rounded-full blur-[100px]" />
           
-          <div className="about-image absolute left-0 top-10 w-64 h-80 bg-background-secondary rounded-2xl overflow-hidden shadow-2xl border border-border/50 z-10">
+          <div className="about-image absolute left-4 sm:left-10 top-10 w-44 h-56 sm:w-60 sm:h-76 md:w-64 md:h-80 bg-background-secondary rounded-2xl overflow-hidden shadow-2xl border border-border/50 z-10">
             <Image 
               src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop"
               alt="Premium convenience store shelves and products at Royal Tower Mart"
@@ -105,7 +105,7 @@ export function About() {
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10" />
           </div>
           
-          <div className="about-image absolute right-0 bottom-10 w-72 h-96 bg-background-secondary rounded-2xl overflow-hidden shadow-2xl border border-border/50 z-20">
+          <div className="about-image absolute right-4 sm:right-10 bottom-10 w-52 h-68 sm:w-64 sm:h-84 md:w-72 md:h-96 bg-background-secondary rounded-2xl overflow-hidden shadow-2xl border border-border/50 z-20">
             <Image 
               src="https://images.unsplash.com/photo-1542314831-c53cd4b85ca4?q=80&w=1000&auto=format&fit=crop"
               alt="Luxury room interior design comfort hotel stay"
