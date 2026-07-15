@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -9,6 +10,15 @@ gsap.registerPlugin(ScrollTrigger);
 export function Cave() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", listener);
+    return () => mediaQuery.removeEventListener("change", listener);
+  }, []);
 
   useEffect(() => {
     // Floating dust particles animation
@@ -65,6 +75,8 @@ export function Cave() {
 
     // GSAP ScrollTrigger timeline to simulate stepping inside the cave
     const context = gsap.context(() => {
+      if (prefersReducedMotion) return;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -111,16 +123,20 @@ export function Cave() {
       cancelAnimationFrame(animationFrameId);
       context.revert();
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section ref={containerRef} id="cave" className="relative h-screen w-full bg-background overflow-hidden flex items-center justify-center">
       
       {/* Background Cave Interior */}
-      <div 
-        className="cave-background absolute inset-0 w-full h-full bg-cover bg-center scale-100"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507163879411-5e9275ab4557?q=80&w=1600&auto=format&fit=crop')" }}
-      >
+      <div className="cave-background absolute inset-0 w-full h-full scale-100">
+        <Image
+          src="https://images.unsplash.com/photo-1507163879411-5e9275ab4557?q=80&w=1600&auto=format&fit=crop"
+          alt="Atmospheric themed stone cave interior with ambient gold lights"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background z-10" />
         <div className="absolute inset-0 bg-black/70 z-0" />
       </div>
@@ -147,25 +163,27 @@ export function Cave() {
         </button>
       </div>
 
-      {/* Interactive Gates (Foregound element that splits open as we walk in) */}
-      <div className="absolute inset-0 flex z-40 pointer-events-none">
-        {/* Left Gate */}
-        <div className="cave-gate-left w-1/2 h-full bg-[#080809] border-r border-border/20 flex flex-col items-end justify-center pr-6 md:pr-16 relative">
-          <div className="absolute inset-0 bg-radial-gradient(at center, rgba(200, 155, 60, 0.05), transparent)" />
-          <div className="text-right pointer-events-auto">
-            <span className="text-xs uppercase tracking-widest text-primary block mb-2">Signature Escape</span>
-            <h3 className="font-heading text-2xl md:text-4xl text-foreground">The Cave</h3>
+      {/* Interactive Gates (Foreground element that splits open as we walk in) */}
+      {!prefersReducedMotion && (
+        <div className="absolute inset-0 flex z-40 pointer-events-none">
+          {/* Left Gate */}
+          <div className="cave-gate-left w-1/2 h-full bg-background border-r border-border/20 flex flex-col items-end justify-center pr-6 md:pr-16 relative">
+            <div className="absolute inset-0 bg-radial-gradient(at center, rgba(200, 155, 60, 0.05), transparent)" />
+            <div className="text-right pointer-events-auto">
+              <span className="text-xs uppercase tracking-widest text-primary block mb-2">Signature Escape</span>
+              <h3 className="font-heading text-2xl md:text-4xl text-foreground">The Cave</h3>
+            </div>
+          </div>
+          {/* Right Gate */}
+          <div className="cave-gate-right w-1/2 h-full bg-background border-l border-border/20 flex flex-col items-start justify-center pl-6 md:pl-16 relative">
+            <div className="absolute inset-0 bg-radial-gradient(at center, rgba(200, 155, 60, 0.05), transparent)" />
+            <div className="text-left pointer-events-auto">
+              <span className="text-xs uppercase tracking-widest text-primary block mb-2">Scroll to Enter</span>
+              <h3 className="font-heading text-2xl md:text-4xl text-foreground">Awaits You</h3>
+            </div>
           </div>
         </div>
-        {/* Right Gate */}
-        <div className="cave-gate-right w-1/2 h-full bg-[#080809] border-l border-border/20 flex flex-col items-start justify-center pl-6 md:pl-16 relative">
-          <div className="absolute inset-0 bg-radial-gradient(at center, rgba(200, 155, 60, 0.05), transparent)" />
-          <div className="text-left pointer-events-auto">
-            <span className="text-xs uppercase tracking-widest text-primary block mb-2">Scroll to Enter</span>
-            <h3 className="font-heading text-2xl md:text-4xl text-foreground">Awaits You</h3>
-          </div>
-        </div>
-      </div>
+      )}
     </section>
   );
 }

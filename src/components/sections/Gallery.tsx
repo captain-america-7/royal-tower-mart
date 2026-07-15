@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/utils/cn";
@@ -89,6 +90,12 @@ export function Gallery() {
   }, [activeCategory]);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      gsap.set(".gallery-item", { opacity: 1, scale: 1, y: 0 });
+      return;
+    }
+
     const ctx = gsap.context(() => {
       // Re-trigger layout entry animation on category change
       gsap.fromTo(
@@ -149,6 +156,8 @@ function GalleryCard({ item }: { item: typeof galleryItems[0] }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -168,6 +177,8 @@ function GalleryCard({ item }: { item: typeof galleryItems[0] }) {
   };
 
   const handleMouseLeave = () => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
     if (!cardRef.current) return;
     gsap.to(cardRef.current, {
       rotateX: 0,
@@ -191,9 +202,12 @@ function GalleryCard({ item }: { item: typeof galleryItems[0] }) {
       <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
       {/* Image */}
-      <div
-        className="w-full h-full bg-cover bg-center transition-transform duration-[3s] ease-out group-hover:scale-105"
-        style={{ backgroundImage: `url('${item.img}')` }}
+      <Image
+        src={item.img}
+        alt={`Royal Tower Mart Gallery: ${item.title}`}
+        fill
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        className="object-cover transition-transform duration-[3s] ease-out group-hover:scale-105"
       />
 
       {/* Dark Overlay info panel */}

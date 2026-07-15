@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import Image from "next/image";
 import { cn } from "@/utils/cn";
 import { Sparkles, Dumbbell, Bed, Coffee } from "lucide-react";
 
@@ -51,6 +51,8 @@ export function InteractiveBuilding() {
 
   // Subtly tilt the building container relative to mouse position
   const handleMouseMove = (e: React.MouseEvent) => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
     if (!buildingRef.current) return;
     const rect = buildingRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -61,7 +63,8 @@ export function InteractiveBuilding() {
     const rotateX = (centerY - y) / 15;
     const rotateY = (x - centerX) / 15;
 
-    gsap.to(buildingRef.current, {
+    const gsapModule = require("gsap").default;
+    gsapModule.to(buildingRef.current, {
       rotateX,
       rotateY,
       duration: 0.5,
@@ -70,8 +73,11 @@ export function InteractiveBuilding() {
   };
 
   const handleMouseLeave = () => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
     if (!buildingRef.current) return;
-    gsap.to(buildingRef.current, {
+    const gsapModule = require("gsap").default;
+    gsapModule.to(buildingRef.current, {
       rotateX: -10, // Slight default tilt
       rotateY: -15, // Slight default tilt
       duration: 0.8,
@@ -154,9 +160,12 @@ export function InteractiveBuilding() {
             {/* Floor image preview */}
             <div className="relative h-44 w-full rounded-2xl overflow-hidden border border-border/20 shadow-md">
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
-              <div
-                className="w-full h-full bg-cover bg-center transition-all duration-1000"
-                style={{ backgroundImage: `url('${buildingFloors[selectedFloor].img}')` }}
+              <Image
+                src={buildingFloors[selectedFloor].img}
+                alt={`Royal Tower Floor Layout: ${buildingFloors[selectedFloor].subtitle}`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover transition-all duration-1000"
               />
             </div>
 

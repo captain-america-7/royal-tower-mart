@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -13,6 +14,9 @@ export function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Check for reduced motion
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
       // Text reveal
       const words = gsap.utils.toArray(".about-word");
       
@@ -21,28 +25,30 @@ export function About() {
           trigger: textRef.current,
           start: "top 80%",
           end: "bottom 40%",
-          scrub: 1,
+          scrub: prefersReducedMotion ? false : 1,
         },
-        opacity: 0.1,
-        y: 20,
-        stagger: 0.1,
+        opacity: prefersReducedMotion ? 1 : 0.1,
+        y: prefersReducedMotion ? 0 : 20,
+        stagger: prefersReducedMotion ? 0 : 0.1,
         ease: "power2.out",
       });
 
-      // Layered imagery parallax
-      const images = gsap.utils.toArray(".about-image");
-      images.forEach((img: any, i) => {
-        gsap.to(img, {
-          yPercent: -20 * (i + 1),
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
+      if (!prefersReducedMotion) {
+        // Layered imagery parallax
+        const images = gsap.utils.toArray(".about-image");
+        images.forEach((img: any, i) => {
+          gsap.to(img, {
+            yPercent: -20 * (i + 1),
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
         });
-      });
+      }
 
     }, sectionRef);
 
@@ -88,18 +94,26 @@ export function About() {
         <div className="w-full lg:w-1/2 relative h-[600px] flex items-center justify-center" ref={imagesRef}>
           <div className="absolute inset-0 bg-primary/5 rounded-full blur-[100px]" />
           
-          <div 
-            className="about-image absolute left-0 top-10 w-64 h-80 bg-background-secondary rounded-2xl overflow-hidden shadow-2xl border border-border/50 z-10"
-            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop')", backgroundSize: 'cover', backgroundPosition: 'center' }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+          <div className="about-image absolute left-0 top-10 w-64 h-80 bg-background-secondary rounded-2xl overflow-hidden shadow-2xl border border-border/50 z-10">
+            <Image 
+              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1000&auto=format&fit=crop"
+              alt="Premium convenience store shelves and products at Royal Tower Mart"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10" />
           </div>
           
-          <div 
-            className="about-image absolute right-0 bottom-10 w-72 h-96 bg-background-secondary rounded-2xl overflow-hidden shadow-2xl border border-border/50 z-20"
-            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542314831-c53cd4b85ca4?q=80&w=1000&auto=format&fit=crop')", backgroundSize: 'cover', backgroundPosition: 'center' }}
-          >
-             <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+          <div className="about-image absolute right-0 bottom-10 w-72 h-96 bg-background-secondary rounded-2xl overflow-hidden shadow-2xl border border-border/50 z-20">
+            <Image 
+              src="https://images.unsplash.com/photo-1542314831-c53cd4b85ca4?q=80&w=1000&auto=format&fit=crop"
+              alt="Luxury room interior design comfort hotel stay"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover"
+            />
+             <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10" />
           </div>
         </div>
       </div>

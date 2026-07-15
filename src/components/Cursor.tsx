@@ -11,12 +11,14 @@ export function Cursor() {
   const [isHidden, setIsHidden] = useState(true);
 
   useEffect(() => {
-    // Only show on non-touch devices
-    if (window.matchMedia("(pointer: coarse)").matches) {
+    // Only show on non-touch devices and users who don't prefer reduced motion
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (window.matchMedia("(pointer: coarse)").matches || prefersReducedMotion) {
       return;
     }
     
     setIsHidden(false);
+    document.documentElement.classList.add("custom-cursor-enabled");
 
     const cursor = cursorRef.current;
     const follower = followerRef.current;
@@ -62,6 +64,7 @@ export function Cursor() {
     gsap.set([cursor, follower], { xPercent: -50, yPercent: -50 });
 
     return () => {
+      document.documentElement.classList.remove("custom-cursor-enabled");
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseover", handleMouseOver);
     };
@@ -73,6 +76,8 @@ export function Cursor() {
     <>
       <div
         ref={cursorRef}
+        aria-hidden="true"
+        role="presentation"
         className={cn(
           "pointer-events-none fixed left-0 top-0 z-[100] h-2 w-2 rounded-full bg-primary transition-opacity duration-300",
           isHovering ? "opacity-0" : "opacity-100"
@@ -80,6 +85,8 @@ export function Cursor() {
       />
       <div
         ref={followerRef}
+        aria-hidden="true"
+        role="presentation"
         className={cn(
           "pointer-events-none fixed left-0 top-0 z-[99] h-10 w-10 rounded-full border border-primary transition-all duration-300",
           isHovering ? "scale-[1.5] bg-primary/10 backdrop-blur-sm" : "scale-100 bg-transparent"

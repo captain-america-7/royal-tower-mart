@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Wifi, Tv, ShieldCheck, ChevronRight } from "lucide-react";
@@ -29,6 +30,9 @@ export function Rooms() {
   const [activeRoom, setActiveRoom] = useState(0);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       // Room images parallax
       gsap.from(".room-img-container", {
@@ -105,9 +109,12 @@ export function Rooms() {
             <div className="flex flex-col gap-8 transition-all duration-500">
               <div className="room-img-container relative h-[300px] md:h-[450px] w-full rounded-2xl overflow-hidden border border-border/20 shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-t from-background-secondary/90 via-transparent to-transparent z-10" />
-                <div
-                  className="w-full h-full bg-cover bg-center transition-all duration-1000"
-                  style={{ backgroundImage: `url('${rooms[activeRoom].img}')` }}
+                <Image
+                  src={rooms[activeRoom].img}
+                  alt={`Luxury room interior view: ${rooms[activeRoom].name}`}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  className="object-cover transition-all duration-1000"
                 />
               </div>
 

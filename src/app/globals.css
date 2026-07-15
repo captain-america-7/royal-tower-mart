@@ -52,3 +52,13 @@ html.lenis, html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* Custom Cursor Fallback */
+html:not(.custom-cursor-enabled) * {
+  cursor: auto !important;
+}
+html:not(.custom-cursor-enabled) a,
+html:not(.custom-cursor-enabled) button,
+html:not(.custom-cursor-enabled) [role="button"] {
+  cursor: pointer !important;
+}

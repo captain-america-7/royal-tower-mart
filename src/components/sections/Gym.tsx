@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Check } from "lucide-react";
+import { cn } from "@/utils/cn";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,8 +29,20 @@ const equipment = [
 
 export function Gym() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", listener);
+    return () => mediaQuery.removeEventListener("change", listener);
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       // Dynamic lighting pulse
       gsap.to(".gym-glow", {
@@ -85,7 +99,7 @@ export function Gym() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section ref={containerRef} id="gym" className="relative h-screen w-full bg-background overflow-hidden flex flex-col justify-between">
@@ -108,20 +122,29 @@ export function Gym() {
 
       {/* Pinned Slides Container */}
       <div className="flex-1 w-full relative z-10 container mx-auto px-6 lg:px-12 flex items-center justify-center py-8">
-        <div className="w-full h-full relative overflow-hidden rounded-3xl border border-border/40 bg-background-secondary/30 backdrop-blur-md shadow-2xl flex">
+        <div className={cn(
+          "w-full h-full relative overflow-hidden rounded-3xl border border-border/40 bg-background-secondary/30 backdrop-blur-md shadow-2xl flex",
+          prefersReducedMotion && "flex-col overflow-y-auto h-auto relative gap-8 p-4 md:p-8"
+        )}>
           
           {equipment.map((item, idx) => (
             <div
               key={idx}
-              className="gym-slide absolute inset-0 w-full h-full flex flex-col lg:flex-row items-center gap-8 p-6 md:p-12 lg:p-16 z-10 bg-background-secondary/95"
-              style={{ zIndex: 10 + idx }}
+              className={cn(
+                "gym-slide w-full h-full flex flex-col lg:flex-row items-center gap-8 p-6 md:p-12 lg:p-16 bg-background-secondary/95",
+                prefersReducedMotion ? "relative" : "absolute inset-0 z-10"
+              )}
+              style={prefersReducedMotion ? {} : { zIndex: 10 + idx }}
             >
               {/* Image Box */}
               <div className="w-full lg:w-1/2 h-48 sm:h-72 lg:h-full relative rounded-2xl overflow-hidden border border-border/20 shadow-xl">
                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent z-10" />
-                <div 
-                  className="w-full h-full bg-cover bg-center transition-transform duration-[4s] hover:scale-105"
-                  style={{ backgroundImage: `url('${item.img}')` }}
+                <Image
+                  src={item.img}
+                  alt={`High-end gym equipment: ${item.name}`}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-[4s] ease-out group-hover:scale-105"
                 />
               </div>
 

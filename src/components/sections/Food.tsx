@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Star } from "lucide-react";
@@ -51,6 +52,9 @@ export function Food() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return;
+
     const ctx = gsap.context(() => {
       gsap.from(".food-card", {
         scrollTrigger: {
@@ -104,9 +108,12 @@ export function Food() {
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-background-secondary via-transparent to-transparent z-10" />
-                <div
-                  className="w-full h-full bg-cover bg-center transition-transform duration-[2.5s] ease-out group-hover:scale-110"
-                  style={{ backgroundImage: `url('${item.img}')` }}
+                <Image
+                  src={item.img}
+                  alt={`Gourmet menu item: ${item.name}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-[2.5s] ease-out group-hover:scale-110"
                 />
               </div>
 
