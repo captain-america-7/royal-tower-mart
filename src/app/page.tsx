@@ -1,7 +1,6 @@
 import { Hero } from "@/components/sections/Hero";
 import { BuildingShowcase } from "@/components/sections/BuildingShowcase";
 import { About } from "@/components/sections/About";
-import { Amenities } from "@/components/sections/Amenities";
 import { Gym } from "@/components/sections/Gym";
 import { Cave } from "@/components/sections/Cave";
 import { Rooms } from "@/components/sections/Rooms";
@@ -19,7 +18,6 @@ export default function Home() {
       <Hero />
       <BuildingShowcase />
       <About />
-      <Amenities />
       <Gym />
       <Cave />
       <Rooms />

@@ -92,7 +92,7 @@ export function Hero() {
       {/* Content */}
       <div className="hero-content relative z-20 flex h-full flex-col items-center justify-center px-6 text-center">
         <div ref={textRef} className="overflow-hidden mb-6">
-          <h1 className="hero-title font-heading text-5xl md:text-7xl lg:text-8xl font-medium text-foreground tracking-tight flex flex-col md:flex-row gap-2 md:gap-6">
+          <h1 className="hero-title font-heading text-5xl md:text-7xl lg:text-8xl font-medium text-foreground tracking-tight flex flex-col md:flex-row gap-2 md:gap-6 justify-center items-center">
             <span className="block">Premium</span>
             <span className="block text-primary italic">Lifestyle</span>
             <span className="block">Destination</span>
@@ -103,12 +103,12 @@ export function Hero() {
           Where Shopping, Fitness & Comfort Meet. Redefining convenience and luxury in Bithoor, Kanpur.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-6">
-          <button className="hero-cta group relative overflow-hidden rounded-full bg-primary px-8 py-4 font-medium text-background transition-transform hover:scale-105" data-magnetic>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md">
+          <button className="hero-cta group relative overflow-hidden rounded-full bg-primary px-8 py-4 font-medium text-background transition-transform hover:scale-105 w-full sm:w-auto min-w-[200px] text-center flex items-center justify-center" data-magnetic>
             <span className="relative z-10">Explore Royal Tower</span>
             <div className="absolute inset-0 bg-primary-hover transform translate-y-full transition-transform duration-300 group-hover:translate-y-0 z-0" />
           </button>
-          <button className="hero-cta group relative rounded-full border border-border px-8 py-4 font-medium text-foreground transition-colors hover:bg-white/5" data-magnetic>
+          <button className="hero-cta group relative rounded-full border border-border px-8 py-4 font-medium text-foreground transition-colors hover:bg-white/5 w-full sm:w-auto min-w-[200px] text-center flex items-center justify-center" data-magnetic>
             Book Your Stay
           </button>
         </div>

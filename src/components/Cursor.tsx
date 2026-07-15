@@ -9,6 +9,7 @@ export function Cursor() {
   const followerRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [isHidden, setIsHidden] = useState(true);
+  const [hasMoved, setHasMoved] = useState(false);
 
   useEffect(() => {
     // Only show on non-touch devices and users who don't prefer reduced motion
@@ -27,6 +28,7 @@ export function Cursor() {
 
     // Move cursor and follower
     const onMouseMove = (e: MouseEvent) => {
+      setHasMoved(true);
       gsap.to(cursor, {
         x: e.clientX,
         y: e.clientY,
@@ -80,7 +82,7 @@ export function Cursor() {
         role="presentation"
         className={cn(
           "pointer-events-none fixed left-0 top-0 z-[100] h-2 w-2 rounded-full bg-primary transition-opacity duration-300",
-          isHovering ? "opacity-0" : "opacity-100"
+          (!hasMoved || isHovering) ? "opacity-0" : "opacity-100"
         )}
       />
       <div
@@ -89,7 +91,7 @@ export function Cursor() {
         role="presentation"
         className={cn(
           "pointer-events-none fixed left-0 top-0 z-[99] h-10 w-10 rounded-full border border-primary transition-all duration-300",
-          isHovering ? "scale-[1.5] bg-primary/10 backdrop-blur-sm" : "scale-100 bg-transparent"
+          (!hasMoved) ? "opacity-0" : (isHovering ? "scale-[1.5] bg-primary/10 backdrop-blur-sm opacity-100" : "scale-100 bg-transparent opacity-100")
         )}
       />
     </>

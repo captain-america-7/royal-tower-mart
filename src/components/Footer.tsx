@@ -14,10 +14,10 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link
               href="/"
-              className="inline-flex flex-col font-heading text-2xl uppercase tracking-widest text-primary mb-6"
+              className="inline-flex flex-col font-heading text-3xl md:text-4xl uppercase tracking-widest text-primary mb-6"
             >
-              <span>Royal</span>
-              <span className="text-base tracking-[0.3em] text-foreground">
+              <span className="font-extrabold">Royal</span>
+              <span className="text-sm tracking-[0.35em] text-foreground font-sans">
                 Tower Mart
               </span>
             </Link>
@@ -28,11 +28,11 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-heading text-xl text-foreground mb-6">Explore</h4>
-            <ul className="space-y-4">
-              {["About", "Amenities", "Gym", "Rooms", "Food & Refreshments"].map((item) => (
+            <h4 className="font-heading text-2xl text-foreground mb-6">Explore</h4>
+            <ul className="space-y-3.5">
+              {["About", "Gym", "Cave", "Rooms", "Gallery", "Food & Refreshments"].map((item) => (
                 <li key={item}>
-                  <Link href={`#${item.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} className="text-muted hover:text-primary transition-colors inline-flex items-center gap-2 group">
+                  <Link href={`#${item.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} className="text-base md:text-lg text-muted hover:text-primary transition-colors inline-flex items-center gap-2 group py-0.5">
                     <span className="w-0 h-px bg-primary transition-all group-hover:w-4"></span>
                     {item}
                   </Link>

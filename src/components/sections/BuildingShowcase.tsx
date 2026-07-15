@@ -9,31 +9,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 const floors = [
   {
-    id: "entertainment",
-    title: "Entertainment Level",
+    id: "third",
+    title: "Third Floor",
     subtitle: "Themed Cave Experience",
-    description: "An immersive environment with warm ambient lighting and moving light rays.",
-    height: "h-32 md:h-40",
-  },
-  {
-    id: "upper",
-    title: "Upper Level",
-    subtitle: "Luxury Rooms",
-    description: "Comfortable, premium stays with a luxury hotel feel.",
+    description: "An immersive, stone-carved atmospheric lounge with custom ambient lighting and premium vibes.",
     height: "h-32 md:h-40",
   },
   {
     id: "second",
     title: "Second Floor",
-    subtitle: "Modern Gym",
-    description: "State-of-the-art fitness center with dynamic lighting.",
+    subtitle: "Modern Gym Center",
+    description: "State-of-the-art fitness equipment, biomechanical trainers, and high-energy ambient lighting.",
     height: "h-32 md:h-40",
   },
   {
     id: "ground",
     title: "Ground Floor",
     subtitle: "Premium Convenience Store",
-    description: "Everything you need, presented in a clean, modern environment.",
+    description: "A meticulously organized, ultra-clean mart featuring a gourmet coffee counter and local specialties.",
+    height: "h-32 md:h-40",
+  },
+  {
+    id: "basement",
+    title: "Basement",
+    subtitle: "Luxury Stays & Lobby",
+    description: "Exquisite and peaceful overnight suites designed for relaxation and premium comfort.",
     height: "h-40 md:h-48",
   },
 ];
@@ -66,27 +66,45 @@ export function BuildingShowcase() {
         },
       });
 
-      // Initially hide all floors (move them down and fade them out)
+      // Initially hide all floors
       gsap.set(".floor-block", { y: 100, opacity: 0, filter: "brightness(0.3)" });
-      gsap.set(".floor-content", { x: -50, opacity: 0 });
+      gsap.set(".floor-content", { y: 50, opacity: 0 });
 
-      // Build the timeline
+      // Build the timeline from basement (last) up to third floor (first)
       const reversedFloors = [...floors].reverse();
 
       reversedFloors.forEach((floor, index) => {
+        // Reveal block
         tl.to(`.floor-block-${floor.id}`, {
           y: 0,
           opacity: 1,
           filter: "brightness(1)",
           duration: 1,
           ease: "power2.out",
-        }, index * 0.8)
-        .to(`.floor-content-${floor.id}`, {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.out",
-        }, "<0.2");
+        }, index * 0.8);
+        
+        // Fade out previous card
+        if (index > 0) {
+          const prevFloor = reversedFloors[index - 1];
+          tl.to(`.floor-content-${prevFloor.id}`, {
+            opacity: 0,
+            y: -50,
+            duration: 0.4,
+            ease: "power2.in",
+          }, index * 0.8 - 0.2);
+        }
+
+        // Fade in active card
+        tl.fromTo(`.floor-content-${floor.id}`, 
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          index * 0.8 + 0.2
+        );
       });
 
     }, sectionRef);
@@ -108,37 +126,27 @@ export function BuildingShowcase() {
         prefersReducedMotion ? "py-10" : "md:flex-row"
       )}>
         
-        {/* Left Side: Content Reveal */}
+        {/* Left Side: Content Card Frame */}
         <div className={cn(
           "w-full flex flex-col justify-center gap-8 relative",
           prefersReducedMotion ? "h-auto md:w-full" : "md:w-1/2 h-[60vh] md:h-[80vh]"
         )}>
-          <div className="mb-4">
-            <h2 className="font-heading text-4xl md:text-5xl text-foreground mb-4">
-              Explore The <span className="text-primary italic">Tower</span>
-            </h2>
-            <p className="text-muted max-w-md">
-              A vertical journey through premium experiences. Watch the tower come alive as you ascend.
-            </p>
-          </div>
-
           <div className={cn(
-            "flex-1",
-            prefersReducedMotion ? "flex flex-col gap-6 relative" : "relative"
+            "relative",
+            prefersReducedMotion ? "flex flex-col gap-6" : "flex-1 min-h-[350px] w-full"
           )}>
             {floors.map((floor) => (
               <div 
                 key={`content-${floor.id}`} 
                 className={cn(
                   `floor-content floor-content-${floor.id}`,
-                  prefersReducedMotion ? "relative w-full opacity-100 translate-x-0" : "absolute bottom-0 w-full"
+                  prefersReducedMotion ? "relative w-full opacity-100 translate-y-0" : "absolute inset-0 flex items-center justify-center md:justify-start"
                 )}
-                style={prefersReducedMotion ? {} : { bottom: floors.findIndex(f => f.id === floor.id) * 20 + '%' }}
               >
-                <div className="bg-background/80 backdrop-blur-md border border-border p-6 rounded-2xl shadow-2xl max-w-sm">
-                  <span className="text-xs font-medium uppercase tracking-widest text-primary mb-2 block">{floor.title}</span>
-                  <h3 className="text-xl font-heading text-foreground mb-2">{floor.subtitle}</h3>
-                  <p className="text-sm text-muted">{floor.description}</p>
+                <div className="bg-background/80 backdrop-blur-md border border-border p-8 rounded-2xl shadow-2xl w-full max-w-md">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-primary mb-2 block">{floor.title}</span>
+                  <h3 className="text-2xl md:text-3xl font-heading text-foreground mb-4">{floor.subtitle}</h3>
+                  <p className="text-sm md:text-base text-muted leading-relaxed">{floor.description}</p>
                 </div>
               </div>
             ))}

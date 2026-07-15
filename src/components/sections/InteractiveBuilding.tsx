@@ -7,28 +7,19 @@ import { Sparkles, Dumbbell, Bed, Coffee } from "lucide-react";
 
 const buildingFloors = [
   {
-    id: "entertainment",
-    name: "Entertainment Level",
+    id: "third",
+    name: "Third Floor",
     subtitle: "Themed Cave Experience",
-    desc: "An immersive, atmospheric custom stone cave setup designed for ultimate evening escapes, events, or peaceful relaxation.",
+    desc: "An immersive, stone-carved atmospheric lounge with custom ambient lighting and premium vibes.",
     img: "https://images.unsplash.com/photo-1507163879411-5e9275ab4557?q=80&w=600&auto=format&fit=crop",
     features: ["Stone Textures", "Ambient Lighting", "Private Lounges", "Sound System"],
     icon: Sparkles,
   },
   {
-    id: "upper",
-    name: "Upper Level",
-    subtitle: "Luxury Staying Rooms",
-    desc: "Premium executive stays designed to deliver luxury hotel level hospitality, complete privacy, and exceptional comfort.",
-    img: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=600&auto=format&fit=crop",
-    features: ["Smart TV Suite", "Hi-Speed Wi-Fi", "Valet Support", "Room Service"],
-    icon: Bed,
-  },
-  {
     id: "second",
     name: "Second Floor",
     subtitle: "Modern Gym Center",
-    desc: "Fully equipped athletic conditioning gym featuring top tier biomechanical machines, free weights, and dynamic interior lighting.",
+    desc: "State-of-the-art fitness equipment, biomechanical trainers, and high-energy ambient lighting.",
     img: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=600&auto=format&fit=crop",
     features: ["Personal Training", "Biofeedback Tech", "Clean Locker Suite", "Modern Cardio"],
     icon: Dumbbell,
@@ -36,11 +27,20 @@ const buildingFloors = [
   {
     id: "ground",
     name: "Ground Floor",
-    subtitle: "Convenience Store & Food",
-    desc: "An ultra clean, highly organized department grocery mart with a refreshing gourmet coffee bar and quick snacks counter.",
+    subtitle: "Premium Convenience Store",
+    desc: "A meticulously organized, ultra-clean mart featuring a gourmet coffee counter and local specialties.",
     img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600&auto=format&fit=crop",
     features: ["Daily Groceries", "KitKat Shakes", "Frothy Cold Coffee", "Quick Checkout"],
     icon: Coffee,
+  },
+  {
+    id: "basement",
+    name: "Basement",
+    subtitle: "Luxury Stays & Lobby",
+    desc: "Exquisite and peaceful overnight suites designed for relaxation and premium comfort.",
+    img: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=600&auto=format&fit=crop",
+    features: ["Smart TV Suite", "Hi-Speed Wi-Fi", "Valet Support", "Room Service"],
+    icon: Bed,
   },
 ];
 

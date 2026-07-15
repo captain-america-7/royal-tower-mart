@@ -19,7 +19,6 @@ export function Navbar() {
 
   const navLinks = [
     { name: "About", href: "#about" },
-    { name: "Amenities", href: "#amenities" },
     { name: "Gym", href: "#gym" },
     { name: "Cave", href: "#cave" },
     { name: "Rooms", href: "#rooms" },
@@ -39,11 +38,11 @@ export function Navbar() {
         <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between">
           <Link
             href="/"
-            className="group flex flex-col font-heading text-xl uppercase tracking-widest text-primary hover:text-primary-hover transition-colors"
+            className="group flex flex-col font-heading text-2xl md:text-3xl uppercase tracking-widest text-primary hover:text-primary-hover transition-colors"
             data-magnetic
           >
-            <span>Royal</span>
-            <span className="text-sm tracking-[0.3em] text-foreground group-hover:text-muted transition-colors">
+            <span className="font-extrabold">Royal</span>
+            <span className="text-xs md:text-sm tracking-[0.35em] text-foreground group-hover:text-muted transition-colors font-sans">
               Tower Mart
             </span>
           </Link>
