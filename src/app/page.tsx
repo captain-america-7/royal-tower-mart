@@ -1,6 +1,17 @@
 import { Hero } from "@/components/sections/Hero";
 import { BuildingShowcase } from "@/components/sections/BuildingShowcase";
 import { About } from "@/components/sections/About";
+import { Amenities } from "@/components/sections/Amenities";
+import { Gym } from "@/components/sections/Gym";
+import { Cave } from "@/components/sections/Cave";
+import { Rooms } from "@/components/sections/Rooms";
+import { Food } from "@/components/sections/Food";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { Gallery } from "@/components/sections/Gallery";
+import { InteractiveBuilding } from "@/components/sections/InteractiveBuilding";
+import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
+import { FAQ } from "@/components/sections/FAQ";
+import { Contact } from "@/components/sections/Contact";
 
 export default function Home() {
   return (
@@ -8,21 +19,17 @@ export default function Home() {
       <Hero />
       <BuildingShowcase />
       <About />
-      {/* 
-        <Amenities />
-        <Gym />
-        <Cave />
-        <Rooms />
-        <Food />
-        <Testimonials />
-        <Gallery />
-        <InteractiveBuilding />
-        <WhyChooseUs />
-        <FAQ />
-      */}
-      <div className="h-[200vh]">
-         {/* Temporary spacing to test scroll */}
-      </div>
+      <Amenities />
+      <Gym />
+      <Cave />
+      <Rooms />
+      <Food />
+      <Testimonials />
+      <Gallery />
+      <InteractiveBuilding />
+      <WhyChooseUs />
+      <FAQ />
+      <Contact />
     </>
   );
 }
